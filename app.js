@@ -5,21 +5,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
-
-// Environment variables go inside .env file in root
 require('dotenv').config();
-// Security for HTTP requests
 const helmet = require('helmet');
-// Compress responses along middleware pipeline
 const compress = require('compression');
-// Import Routes
 const routes = require('./routes/index');
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(helmet());
@@ -29,17 +24,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   sassMiddleware({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
+    src: path.join(__dirname, 'public/angular'),
+    dest: path.join(__dirname, 'public/angular'),
     indentedSyntax: true, // true = .sass and false = .scss
     sourceMap: true,
   })
 );
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/', routes);
+app.use(express.static(path.join(__dirname, 'public/angular/dist')));
+app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
