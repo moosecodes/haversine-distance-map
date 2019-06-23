@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { API_KEY, API_URL } = process.env;
+const { API_KEY, API_URL, DIRECTIONS_URL, DIRECTIONS_API_KEY } = process.env;
 
 Number.prototype.toRad = function() {
   return (this * Math.PI) / 180;
@@ -27,7 +27,7 @@ module.exports = {
           // always executed
         });
     } else {
-      res.send('Please provide a valid address');
+      res.send({ error_message: 'Please provide a valid address.' });
     }
   },
   reverseGeoAPI(req, res, next) {
@@ -53,7 +53,7 @@ module.exports = {
           // always executed
         });
     } else {
-      res.send('Please provide valid coordinates');
+      res.send({ error_message: 'Please provide valid coordinates.' });
     }
   },
   distanceAPI(req, res, next) {
@@ -88,5 +88,32 @@ module.exports = {
     const distance = radii[unit] * c;
 
     res.send({ distance, unit, start, end });
+  },
+  directionsAPI(req, res, next) {
+    let { origin, destination } = req.body;
+    if (origin && destination) {
+      axios
+        .get(DIRECTIONS_URL, {
+          params: {
+            origin,
+            destination,
+            key: DIRECTIONS_API_KEY,
+          },
+        })
+        .then(function(response) {
+          res.send(response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+          res.send({
+            error_message: error,
+          });
+        })
+        .then(function() {
+          // always executed
+        });
+    } else {
+      res.send({ error_message: 'Please provide valid coordinates.' });
+    }
   },
 };
