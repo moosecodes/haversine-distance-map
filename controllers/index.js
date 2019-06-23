@@ -57,7 +57,10 @@ module.exports = {
     latlng1 = latlng1.split(', ');
     latlng2 = latlng2.split(', ');
 
-    const radiusOfEarth = 3958.8;
+    const radiusOfEarth = {
+      miles: 3958.756,
+      km: 6371,
+    };
 
     res.send(
       `x1 = ${latlng1[0]}, y1 = ${latlng1[1]}\nx2 = ${latlng2[0]}, y2 = ${
