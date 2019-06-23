@@ -1,6 +1,10 @@
 const axios = require('axios');
 const { API_KEY, API_URL } = process.env;
 
+Number.prototype.toRad = function() {
+  return (this * Math.PI) / 180;
+};
+
 module.exports = {
   geoEncodeAPI(req, res, next) {
     const address = req.body.address;
@@ -53,22 +57,36 @@ module.exports = {
     }
   },
   distanceAPI(req, res, next) {
-    let { latlng1, latlng2 } = req.body;
-    latlng1 = latlng1.split(', ');
-    latlng2 = latlng2.split(', ');
-
-    const radiusOfEarth = {
-      miles: 3958.756,
-      km: 6371,
+    let { start, end } = req.body;
+    start = start.replace(/ /g, '');
+    start = {
+      lat: Number(start.split(',')[0]),
+      long: Number(start.split(',')[1]),
     };
+    end = end.replace(/ /g, '');
+    end = {
+      lat: Number(end.split(',')[0]),
+      long: Number(end.split(',')[1]),
+    };
+    const radii = {
+      mi: 3958.756,
+      km: 6371,
+      ft: 20902000,
+    };
+    const unit = 'km';
 
-    res.send(
-      `x1 = ${latlng1[0]}, y1 = ${latlng1[1]}\nx2 = ${latlng2[0]}, y2 = ${
-        latlng2[1]
-      }`
-    );
-  },
-  renderMainPage(req, res, next) {
-    res.render('index', { title: 'Peakers Geocoding Challenge' });
+    const dLat = (end.lat - start.lat).toRad();
+    const dLon = (end.long - start.long).toRad();
+    const lat1 = start.lat.toRad();
+    const lat2 = end.lat.toRad();
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = radii[unit] * c;
+
+    res.send({ distance, unit, start, end });
   },
 };
