@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { DistanceFinderService } from '../services/distance-finder.service';
 
 // just an interface for type safety.
@@ -18,19 +18,15 @@ interface marker {
 })
 export class GoogleMapComponent implements OnInit {
   constructor(private _distanceFinder: DistanceFinderService) {}
-  title = 'Peakers Geocoding Challenge';
+  title = 'Peakers.ai Geocoding Challenge';
   distance;
   zoom = 12;
-  center = {
-    lat: 34.020465,
-    lng: -118.4928982,
-  };
   markers: marker[] = [
     {
       lat: 34.0704802,
       lng: -118.2988647,
       label: 'M',
-      balloon: 'Moose lives in Koreatown but is able to relocate.',
+      balloon: 'Moose lives in Koreatown and is willing to relocate.',
       draggable: true,
       streetAddr: '222 S Mariposa Ave, Los Angeles, CA',
     },
@@ -43,7 +39,10 @@ export class GoogleMapComponent implements OnInit {
       streetAddr: '730 Arizona Ave, Santa Monica, CA',
     },
   ];
-
+  center = {
+    lat: this.markers[1].lat,
+    lng: this.markers[1].lng,
+  };
   ngOnInit() {
     this.findDistance();
   }

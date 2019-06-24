@@ -1,36 +1,40 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>{{ title }}</span>
-    <span class="nav-spacer"></span>
-    <p>
-      Distance: {{ distance?.distance | number: '1.2-2' }}
+    <span>
+      Distance to Peakers.ai office in Santa Monica:
+      {{ distance?.distance | number: '1.2-2' }}
       {{ ' ' + distance?.unit }}
-    </p>
+    </span>
+    <span class="nav-spacer"></span>
+    <span>{{ title }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-card *ngFor="let m of markers">
+  <p>
+    <strong>{{ m.label === 'P' ? 'Peakers.ai' : 'Moose' }} Location</strong>
+  </p>
+  <p>
+    <small>Street Address:</small>
+    <br />
+    <br />
+    <input [(ngModel)]="m.streetAddr" />
+  </p>
+  <p>
+    <small>Latitude:</small>
+    <br />
+    <br />
+    <input [(ngModel)]="m.lat" />
+  </p>
+  <p>
+    <small>Longitude:</small>
+    <br />
+    <br />
+    <input [(ngModel)]="m.lng" />
+    <br />
+  </p>
+</mat-card>
 <mat-card>
-  <form *ngFor="let m of markers">
-    <mat-form-field>
-      <input matInput placeholder="Street Address" [value]="m.streetAddr" />
-    </mat-form-field>
-    <br />
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="{{ m.label === 'P' ? 'Peakers Lat ' : 'Moose Lat' }}"
-        [value]="m.lat"
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="{{ m.label === 'P' ? 'Peakers Long: ' : 'Moose Long' }}"
-        [value]="m.lng"
-      />
-    </mat-form-field>
-  </form>
-  <br />
   <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
     <agm-marker
       *ngFor="let m of markers"
