@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>
-      Distance to Peakers.ai:
+      Distance:
       {{ distance?.distance | number: '1.2-2' }}
       {{ ' ' + distance?.unit }}
     </span>
@@ -9,31 +9,36 @@
     <span>{{ title }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
-
-<mat-card *ngFor="let m of markers">
-  <p>
-    <strong>{{ m.label === 'P' ? 'Peakers.ai' : 'Moose' }} Location</strong>
-  </p>
-  <p>
-    <small>Street Address:</small>
-    <br />
-    <br />
-    <input [(ngModel)]="m.streetAddr" />
-  </p>
-  <p>
-    <small>Latitude:</small>
-    <br />
-    <br />
-    <input [(ngModel)]="m.lat" (keyup)="findDistance()" />
-  </p>
-  <p>
-    <small>Longitude:</small>
-    <br />
-    <br />
-    <input [(ngModel)]="m.lng" (keyup)="findDistance()" />
-    <br />
-  </p>
-</mat-card>
+<div class="addresses">
+  <mat-card *ngFor="let m of markers">
+    <p>
+      <strong>{{ m.label === 'P' ? 'Peakers.ai' : 'Moose' }} Location</strong>
+    </p>
+    <p>
+      <small>Street Address:</small>
+      <br />
+      <br />
+      <input [(ngModel)]="m.streetAddr" (change)="encode()" />
+    </p>
+    <p>
+      <small>Latitude:</small>
+      <br />
+      <br />
+      <input
+        [(ngModel)]="m.lat"
+        (keyup)="findDistance()"
+        (change)="reverseEncode()"
+      />
+    </p>
+    <p>
+      <small>Longitude:</small>
+      <br />
+      <br />
+      <input [(ngModel)]="m.lng" (keyup)="findDistance()" />
+      <br />
+    </p>
+  </mat-card>
+</div>
 <mat-card>
   <p>
     <strong>{{ distance?.distance | number: '1.2-2' }}</strong>

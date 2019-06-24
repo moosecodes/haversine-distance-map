@@ -1,6 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { DistanceFinderService } from '../services/distance-finder.service';
 import { GeoencodeService } from '../services/geoencode.service';
+import { ReverseEncodeService } from '../services/reverse-encode.service';
 
 // just an interface for type safety.
 interface marker {
@@ -12,6 +13,10 @@ interface marker {
   streetAddr: string;
 }
 
+interface myData {
+  address: String;
+}
+
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
@@ -20,7 +25,8 @@ interface marker {
 export class GoogleMapComponent implements OnInit {
   constructor(
     private _distanceFinder: DistanceFinderService,
-    private _encoder: GeoencodeService
+    private _encoder: GeoencodeService,
+    private _decoder: ReverseEncodeService
   ) {}
 
   title = 'Peakers.ai Geocoding Challenge';
@@ -46,31 +52,44 @@ export class GoogleMapComponent implements OnInit {
   ];
 
   center = {
-    lat: this.markers[1].lat,
-    lng: this.markers[1].lng,
+    lat: 34.020465,
+    lng: -118.4928982,
   };
 
   ngOnInit() {
-    this._encoder
-      .geoEncode(this.markers[0].streetAddr)
-      .subscribe(
-        data => (
-          (this.markers[0].lat = data.coords.lat),
-          (this.markers[0].lng = data.coords.lng)
-        ),
-        error => (this.markers[0] = error)
-      );
-    this._encoder
-      .geoEncode(this.markers[1].streetAddr)
-      .subscribe(
-        data => (
-          (this.markers[1].lat = data.coords.lat),
-          (this.markers[1].lng = data.coords.lng)
-        ),
-        error => (this.markers[1] = error)
-      );
-
+    this.encode(this.markers[0], this.markers[1]);
     this.findDistance();
+  }
+
+  encode(from, to) {
+    !from ? (from = this.markers[0]) : null;
+    !to ? (to = this.markers[1]) : null;
+    this._encoder
+      .geoEncode(from.streetAddr)
+      .subscribe(
+        data => ((from.lat = data.coords.lat), (from.lng = data.coords.lng)),
+        error => (from = error)
+      );
+    this._encoder
+      .geoEncode(to.streetAddr)
+      .subscribe(
+        data => ((to.lat = data.coords.lat), (to.lng = data.coords.lng)),
+        error => (to = error)
+      );
+  }
+
+  reverseEncode(from, to) {
+    !from ? (from = this.markers[0]) : null;
+    !to ? (to = this.markers[1]) : null;
+    this._decoder
+      .reverse(from.lat + ', ' + from.lng)
+      .subscribe(
+        data => (from.streetAddr = data.address),
+        error => (from = error)
+      );
+    this._decoder
+      .reverse(to.lat + ', ' + to.lng)
+      .subscribe(data => (to.streetAddr = data.address), error => (to = error));
   }
 
   findDistance() {
