@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'map',
+    path: '',
     loadChildren: () =>
       import('./google-map/google-map.module').then(mod => mod.GoogleMapModule),
   },

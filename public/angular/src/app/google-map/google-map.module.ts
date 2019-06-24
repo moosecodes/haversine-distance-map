@@ -11,7 +11,7 @@ import { AgmCoreModule } from '@agm/core';
     CommonModule,
     GoogleMapRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+      apiKey: 'AIzaSyCLOHEF0Y58CoNnPE0q-_hnMnv_IV6Zw7I',
     }),
   ],
 })
