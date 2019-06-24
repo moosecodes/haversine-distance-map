@@ -1,5 +1,9 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+.mat-toolbar.mat-primary {
+  background: black;
+}
+
 .mat-toolbar .mat-icon {
   padding: 0 14px;
 }
