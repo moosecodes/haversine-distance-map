@@ -1,9 +1,30 @@
-# Readme File for Peakers Geocoding Challenge
+# Peakers Geocoding Challenge
+
+## Written by Mustafa Ishaq
 
 Dear Hiring Team @ Peakers,
 
-Thank you for considering me as a candidate and for providing this fun challenge for me to test some of my technical skills.
+Thank you for considering me as a candidate and for providing this challenge. I had a lot of fun thinking about this project and working on it.
 
-For this project, I will use an ExpressJS server to create the front and back-end for a geocoding and distance tracking project.
+## Features
 
-I will use Angular on the front-end.
+- Geoencode addresses on input change
+- Reverse Geoencode coordinates on input change
+- Haversine distance calculations between the two points
+- Google Map with markers that update on the fly
+- Markers have ballon text that can be customized
+- Coming Soon: Google Directions API with driving distance (API already built)
+
+## Installing
+
+Using npm:
+
+```bash
+$ npm install
+```
+
+Using yarn:
+
+```bash
+$ yarn
+```
