@@ -17,14 +17,22 @@ Thank you for considering me as a candidate and for providing this challenge. I 
 
 ## Installing
 
-Using npm:
+Install depenencies using npm:
 
 ```bash
 $ npm install
 ```
 
-Using yarn:
+Install dependecies using yarn:
 
 ```bash
 $ yarn
 ```
+
+Run nodemon to start server:
+
+```bash
+$ nodemon bin/www
+```
+
+Navigate in browser to: [http://localhost:3000](http://localhost:3000)
