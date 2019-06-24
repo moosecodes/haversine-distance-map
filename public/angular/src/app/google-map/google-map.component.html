@@ -2,26 +2,45 @@
   <mat-toolbar-row>
     <span>{{ title }}</span>
     <span class="nav-spacer"></span>
-    <!-- <mat-icon>favorite</mat-icon>
-    <mat-icon>delete</mat-icon> -->
+    <p>
+      Distance: {{ distance?.distance | number: '1.2-2' }}
+      {{ ' ' + distance?.unit }}
+    </p>
   </mat-toolbar-row>
 </mat-toolbar>
-<button (click)="findDistance()">find distance</button>
-<p>Distance: {{ distance?.distance + ' ' + distance?.unit }}</p>
-<p>
-  <small>Center: {{ center.lat }}, {{ center.lng }}</small>
-</p>
-<p *ngFor="let m of markers">
-  <small>{{
-    m.label === 'P' ? 'Peakers: ' + m.lat + ', ' + m.lng : null
-  }}</small>
-  <small>{{ m.label === 'M' ? 'Moose: ' + m.lat + ', ' + m.lng : null }}</small>
-</p>
-<agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
-  <agm-marker
-    *ngFor="let marker of markers"
-    [latitude]="marker.lat"
-    [longitude]="marker.lng"
-    [label]="marker?.label"
-  ></agm-marker>
-</agm-map>
+<mat-card>
+  <form *ngFor="let m of markers">
+    <mat-form-field>
+      <input matInput placeholder="Street Address" [value]="m.streetAddr" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ m.label === 'P' ? 'Peakers Lat ' : 'Moose Lat' }}"
+        [value]="m.lat"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ m.label === 'P' ? 'Peakers Long: ' : 'Moose Long' }}"
+        [value]="m.lng"
+      />
+    </mat-form-field>
+  </form>
+  <br />
+  <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
+    <agm-marker
+      *ngFor="let m of markers"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m?.label"
+    >
+      <agm-info-window [disableAutoPan]="true">
+        {{ m.balloon }}
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</mat-card>

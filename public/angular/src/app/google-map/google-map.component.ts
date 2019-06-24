@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MarkerManager } from '@agm/core';
 import { DistanceFinderService } from '../services/distance-finder.service';
 
 // just an interface for type safety.
@@ -7,7 +6,9 @@ interface marker {
   lat: number;
   lng: number;
   label?: string;
+  balloon: string;
   draggable: boolean;
+  streetAddr: string;
 }
 
 @Component({
@@ -16,10 +17,7 @@ interface marker {
   styleUrls: ['./google-map.component.scss'],
 })
 export class GoogleMapComponent implements OnInit {
-  constructor(
-    private _markerManager: MarkerManager,
-    private _distanceFinder: DistanceFinderService
-  ) {}
+  constructor(private _distanceFinder: DistanceFinderService) {}
   title = 'Peakers Geocoding Challenge';
   distance;
   zoom = 12;
@@ -32,25 +30,19 @@ export class GoogleMapComponent implements OnInit {
       lat: 34.0704802,
       lng: -118.2988647,
       label: 'M',
-      draggable: false,
+      balloon: 'Moose lives in Koreatown but is able to relocate.',
+      draggable: true,
+      streetAddr: '222 S Mariposa Ave, Los Angeles, CA',
     },
     {
       lat: 34.020465,
       lng: -118.4928982,
       label: 'P',
-      draggable: false,
+      balloon: 'Peakers.ai is located in Santa Monica.',
+      draggable: true,
+      streetAddr: '730 Arizona Ave, Santa Monica, CA',
     },
   ];
-
-  mapClicked(event) {
-    console.log(event);
-    // this.markers.push({
-    //   lat: event.coords.lat,
-    //   lng: event.coords.lng,
-    //   label: new Date().toString(),
-    //   draggable: true,
-    // });
-  }
 
   ngOnInit() {
     this.findDistance();
