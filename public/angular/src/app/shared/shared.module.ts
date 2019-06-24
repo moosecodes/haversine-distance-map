@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
+    MatChipsModule,
   ],
   exports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
+    MatChipsModule,
   ],
 })
 export class SharedModule {}

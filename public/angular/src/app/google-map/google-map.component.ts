@@ -13,8 +13,11 @@ interface marker {
   streetAddr: string;
 }
 
-interface myData {
+interface Address {
   address: String;
+}
+interface Coords {
+  address: Object;
 }
 
 @Component({
@@ -32,33 +35,31 @@ export class GoogleMapComponent implements OnInit {
   title = 'Peakers.ai Geocoding Challenge';
   distance;
   zoom = 12;
-  markers: marker[] = [
-    {
-      lat: 0,
-      lng: 0,
-      label: 'M',
-      balloon: 'Moose lives in Koreatown and is willing to relocate.',
-      draggable: true,
-      streetAddr: '222 S Mariposa Ave, Los Angeles, CA',
-    },
-    {
-      lat: 0,
-      lng: 0,
-      label: 'P',
-      balloon: 'Peakers.ai is located in Santa Monica.',
-      draggable: true,
-      streetAddr: '730 Arizona Ave, Santa Monica, CA',
-    },
-  ];
-
   center = {
     lat: 34.020465,
     lng: -118.4928982,
   };
+  markers: marker[] = [
+    {
+      lat: 34.0704802,
+      lng: -118.2988647,
+      label: 'M',
+      balloon: 'Moose lives in Koreatown and is willing to relocate.',
+      draggable: false,
+      streetAddr: '222 S Mariposa Ave, Los Angeles, CA',
+    },
+    {
+      lat: this.center.lat,
+      lng: this.center.lng,
+      label: 'P',
+      balloon: 'Peakers.ai is located in Santa Monica.',
+      draggable: false,
+      streetAddr: '730 Arizona Ave, Santa Monica, CA',
+    },
+  ];
 
   ngOnInit() {
     this.encode(this.markers[0], this.markers[1]);
-    this.findDistance();
   }
 
   encode(from, to) {
@@ -67,13 +68,21 @@ export class GoogleMapComponent implements OnInit {
     this._encoder
       .geoEncode(from.streetAddr)
       .subscribe(
-        data => ((from.lat = data.coords.lat), (from.lng = data.coords.lng)),
+        data => (
+          (from.lat = data.coords.lat),
+          (from.lng = data.coords.lng),
+          this.findDistance()
+        ),
         error => (from = error)
       );
     this._encoder
       .geoEncode(to.streetAddr)
       .subscribe(
-        data => ((to.lat = data.coords.lat), (to.lng = data.coords.lng)),
+        data => (
+          (to.lat = data.coords.lat),
+          (to.lng = data.coords.lng),
+          this.findDistance()
+        ),
         error => (to = error)
       );
   }
@@ -90,6 +99,7 @@ export class GoogleMapComponent implements OnInit {
     this._decoder
       .reverse(to.lat + ', ' + to.lng)
       .subscribe(data => (to.streetAddr = data.address), error => (to = error));
+    this.findDistance();
   }
 
   findDistance() {
