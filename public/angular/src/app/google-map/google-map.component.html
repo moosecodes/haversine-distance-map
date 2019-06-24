@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>
-      Distance to Peakers.ai office in Santa Monica:
+      Distance to Peakers.ai:
       {{ distance?.distance | number: '1.2-2' }}
       {{ ' ' + distance?.unit }}
     </span>
@@ -36,8 +36,10 @@
 </mat-card>
 <mat-card>
   <p>
-    {{ distance?.distance | number: '1.2-2' }}
-    {{ ' ' + distance?.unit }} to Peakers.ai from {{ markers[0].streetAddr }}
+    <strong>{{ distance?.distance | number: '1.2-2' }}</strong>
+    <strong>{{ ' ' + distance?.unit }}</strong> to
+    <strong>Peakers.ai in Santa Monica</strong> from
+    <strong>{{ markers[0].streetAddr }}</strong>
   </p>
   <agm-map
     [latitude]="center.lat"
