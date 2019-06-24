@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarkerManager } from '@agm/core';
+import { DistanceFinderService } from '../services/distance-finder.service';
 
 // just an interface for type safety.
 interface marker {
@@ -15,8 +16,12 @@ interface marker {
   styleUrls: ['./google-map.component.scss'],
 })
 export class GoogleMapComponent implements OnInit {
-  constructor(private markerManager: MarkerManager) {}
+  constructor(
+    private _markerManager: MarkerManager,
+    private _distanceFinder: DistanceFinderService
+  ) {}
   title = 'Peakers Geocoding Challenge';
+  distance;
   zoom = 12;
   center = {
     lat: 34.020465,
@@ -36,7 +41,6 @@ export class GoogleMapComponent implements OnInit {
       draggable: false,
     },
   ];
-  distance = '100';
 
   mapClicked(event) {
     console.log(event);
@@ -49,6 +53,18 @@ export class GoogleMapComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Map Initialized.', this.markers);
+    this.findDistance();
+  }
+  findDistance() {
+    let coords = {
+      start: this.markers[0].lat + ', ' + this.markers[0].lng,
+      end: this.markers[1].lat + ', ' + this.markers[1].lng,
+    };
+    this._distanceFinder
+      .getDistance(coords)
+      .subscribe(
+        data => (this.distance = data),
+        error => (this.distance = error)
+      );
   }
 }

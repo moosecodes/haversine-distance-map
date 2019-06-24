@@ -73,7 +73,7 @@ module.exports = {
       km: 6371,
       ft: 20902000,
     };
-    const unit = 'km';
+    const unit = 'mi';
 
     const dLat = (end.lat - start.lat).toRad();
     const dLon = (end.long - start.long).toRad();
@@ -86,6 +86,7 @@ module.exports = {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     const distance = radii[unit] * c;
+    console.log({ distance, unit, start, end });
 
     res.send({ distance, unit, start, end });
   },

@@ -6,12 +6,17 @@
     <mat-icon>delete</mat-icon> -->
   </mat-toolbar-row>
 </mat-toolbar>
-<p>center: {{ center.lat }}, {{ center.lng }}</p>
-<p *ngFor="let m of markers">
-  {{ m.label === 'P' ? 'Peakers: ' + m.lat + ', ' + m.lng : null }}
-  {{ m.label === 'M' ? 'Peakers: ' + m.lat + ', ' + m.lng : null }}
+<button (click)="findDistance()">find distance</button>
+<p>Distance: {{ distance?.distance + ' ' + distance?.unit }}</p>
+<p>
+  <small>Center: {{ center.lat }}, {{ center.lng }}</small>
 </p>
-<p>Distance: {{ distance }}</p>
+<p *ngFor="let m of markers">
+  <small>{{
+    m.label === 'P' ? 'Peakers: ' + m.lat + ', ' + m.lng : null
+  }}</small>
+  <small>{{ m.label === 'M' ? 'Moose: ' + m.lat + ', ' + m.lng : null }}</small>
+</p>
 <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
   <agm-marker
     *ngFor="let marker of markers"
