@@ -24,13 +24,13 @@
     <small>Latitude:</small>
     <br />
     <br />
-    <input [(ngModel)]="m.lat" />
+    <input [(ngModel)]="m.lat" (keyup)="findDistance()" />
   </p>
   <p>
     <small>Longitude:</small>
     <br />
     <br />
-    <input [(ngModel)]="m.lng" />
+    <input [(ngModel)]="m.lng" (keyup)="findDistance()" />
     <br />
   </p>
 </mat-card>
