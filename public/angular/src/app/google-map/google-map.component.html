@@ -33,16 +33,18 @@
     <input [(ngModel)]="m.lng" (keyup)="findDistance()" />
     <br />
   </p>
-  <p>
-    {{ m.lat + ' ' + m.lng }}
-  </p>
 </mat-card>
 <mat-card>
   <p>
     {{ distance?.distance | number: '1.2-2' }}
     {{ ' ' + distance?.unit }} to Peakers.ai from {{ markers[0].streetAddr }}
   </p>
-  <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
+  <agm-map
+    [latitude]="center.lat"
+    [longitude]="center.lng"
+    [zoom]="zoom"
+    [scrollwheel]="null"
+  >
     <agm-marker
       *ngFor="let m of markers"
       [latitude]="m.lat"
