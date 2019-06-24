@@ -7,6 +7,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MarkerManager } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { SharedModule } from '../shared/shared.module';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [GoogleMapComponent],
@@ -16,7 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     GoogleMapRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCLOHEF0Y58CoNnPE0q-_hnMnv_IV6Zw7I',
+      apiKey: environment.API_KEY,
     }),
   ],
 })
