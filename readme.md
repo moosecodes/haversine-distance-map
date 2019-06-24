@@ -6,6 +6,8 @@ Dear Hiring Team @ Peakers,
 
 Thank you for considering me as a candidate and for providing this challenge. I had a lot of fun thinking about this project and working on it. I think that this app is pretty cool because the user can update the coordinates or street addresses and the map will update the markers in real time as the values are changed. There is no need to press a submit button to get the data from the APIs. When the page loads initially, the app will use the street addresses of my location and the Peakers office in Santa Monica to determine the coordinates for each location. The coordinates are retrived fairly quickly but if you look closely as the page is loaded, you will notice the coordinates update according to the addresses. The map is centered by default on 730 Arizona Ave, Santa Monica, CA.
 
+I think the next version of this app (which will include Google Directions drawn on the map as lines) will provide some technical challenges. Firstly, I would like the next iteration of this app to use the users location based on information from their browser, instead of using my address as one of the default locations. Another set of technical issues could arise if the users request features for multiple points, as this program is only capable of handling two points effectively.
+
 Please take some time to run the server and visit the front end of the site and play around with the inputs. The map is set to not zoom on scroll by default.
 
 Here is a list of some of the features of this app:
