@@ -1,10 +1,14 @@
-# Peakers Geocoding Challenge
+# Geocoding Challenge received recently (timestamps are in git log)
 
 ## Written by Mustafa Ishaq
 
-Dear Hiring Team @ Peakers,
+Dear Coders @ The Marcus Buckingham Company,
 
-Thank you for considering me as a candidate and for providing this challenge. I had a lot of fun thinking about this project and working on it. I think that this app is pretty cool because the user can update the coordinates or street addresses and the map will update the markers in real time as the values are changed. There is no need to press a submit button to get the data from the APIs. When the page loads initially, the app will use the street addresses of my location and the Peakers office in Santa Monica to determine the coordinates for each location. The coordinates are retrived fairly quickly but if you look closely as the page is loaded, you will notice the coordinates update according to the addresses. The map is centered by default on 730 Arizona Ave, Santa Monica, CA.
+Thank you for considering me as a candidate and for taking the time to review this code. I had a lot of fun thinking about this project and working on it.
+
+This is a Node.js app that using the Express.js framework on the back end and Angular 8 on the front-end. The server listens to endpoints that geoencode addresses, reverse geoencode latitudinal and longitudinal coordinates, a distance calculator between two valid Google maps markers using the Haversine Formula of distance calculation on a spherical object, as well as provide turn-by-turn driving directions (feature is built in to the api but not on the front end in this version yet). The UI is dynamic and the markers update as the user changes the inputs.
+
+I think that this app is pretty cool because the user can update the coordinates or street addresses and the map will update the markers in real time as the values are changed. There is no need to press a submit button to get the data from the APIs. When the page loads initially, the app will use the street addresses of my current location and the The Marcus Buckingham Companys' office in Beverly Hills to determine the coordinates for each location. The coordinates are retrived fairly quickly but if you look closely as the page is loaded, you will notice the coordinates update according to the addresses. The map is centered by default on 8350 Wilshire Blvd, Beverly Hills, CA.
 
 I think the next version of this app (which will include Google Directions drawn on the map as lines) will provide some technical challenges. Firstly, I would like the next iteration of this app to use the users location based on information from their browser, instead of using my address as one of the default locations. Another set of technical issues could arise if the users request features for multiple points, as this program is only capable of handling two points effectively.
 

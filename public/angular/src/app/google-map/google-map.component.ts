@@ -32,7 +32,7 @@ export class GoogleMapComponent implements OnInit {
     private _decoder: ReverseEncodeService
   ) {}
 
-  title = 'Peakers.ai Geocoding Challenge';
+  title = 'The Marcus Buckingham Company';
   distance;
   zoom = 12;
   center = {
@@ -52,9 +52,9 @@ export class GoogleMapComponent implements OnInit {
       lat: this.center.lat,
       lng: this.center.lng,
       label: 'P',
-      balloon: 'Peakers.ai is located in Santa Monica.',
+      balloon: 'TMBG is located in Beverly Hills.',
       draggable: false,
-      streetAddr: '730 Arizona Ave, Santa Monica, CA',
+      streetAddr: '8350 Wilshire Blvd, Beverly Hills, CA',
     },
   ];
 
