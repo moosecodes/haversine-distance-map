@@ -14,6 +14,8 @@ Express server connects to Google Maps API and Google Directions API to display 
 
 ## Installing
 
+Navigate your terminal/console to the cloned repository/directory on your file system and:
+
 First Install depenencies either using npm:
 
 ```bash
@@ -39,10 +41,14 @@ API_KEY=<YOUR-API-KEY>
 
 Note: Please replace all '<YOUR-API-KEY>' placeholders with your own Google Maps API and Google Directions API keys!
 
-Run nodemon to start server:
+If you want the server to restart automatically (on save) while you develop, you can use nodemon:
 
 ```bash
 $ nodemon bin/www
 ```
+Otherwise, you can manually restart the server everytime you make a change by using node:
 
+```bash
+$ node bin/www
+```
 Navigate in browser to: [http://localhost:3000](http://localhost:3000)
