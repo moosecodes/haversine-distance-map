@@ -7,7 +7,7 @@ Express server connects to Google Maps API and Google Directions API to display 
 - Geoencode addresses on input change
 - Reverse Geoencode coordinates on input change
 - Haversine distance calculations between the two points
-- Uses [https://angular-maps.com/](Angular Google Maps)
+- Uses [https://angular-maps.com/](Angular\ Google\ Maps)
 - Google Map with markers that update on the fly
 - Markers have ballon text that can be customized
 - Coming Soon: Google Directions API with driving distance (API already built)
