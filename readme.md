@@ -20,6 +20,8 @@ Install depenencies using npm:
 $ npm install
 ```
 
+Or
+
 Install dependecies using yarn:
 
 ```bash
