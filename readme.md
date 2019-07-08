@@ -14,30 +14,30 @@ Express server connects to Google Maps API and Google Directions API to display 
 
 ## Installing
 
-Install depenencies using npm:
+First Install depenencies either using npm:
 
 ```bash
 $ npm install
 ```
 
-Or
-
-Install dependecies using yarn:
+Or, install dependecies using yarn:
 
 ```bash
 $ yarn
 ```
 
-Create .env file in root directory with the following contents:
+Then create an .env file in root directory of the project with the following contents:
 
 ```bash
 API_URL=https://maps.googleapis.com/maps/api/geocode/json?
 API_KEY=<YOUR-API-KEY>
 
-DIRECTIONS_URL=https://maps.googleapis.com/maps/api/directions/json?
+# Driving Directions coming soon
+# DIRECTIONS_URL=https://maps.googleapis.com/maps/api/directions/json?
+# DIRECTIONS_KEY=<YOUR-API-KEY>
 ```
 
-Note: Please replace '<YOUR-API-KEY>' with your key!
+Note: Please replace all '<YOUR-API-KEY>' placeholders with your own Google Maps API and Google Directions API keys!
 
 Run nodemon to start server:
 
