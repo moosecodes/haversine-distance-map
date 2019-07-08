@@ -1,4 +1,4 @@
-# Geocoding Google Map
+# Distance calculating using Haversine Formula - Angular Google Maps (AGM)
 
 Express server connects to Google Maps API and Google Directions API to display distance between two points.  Direct distance is calculated using the Haversine Formula.  Directions API is used for turn by turn directions (API connected but feature not implemented on the front end, yet).
 
